@@ -11,7 +11,7 @@ if __name__ == "__main__":
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, square_size_mm, mm)    # Criteria
     objpoints = []                    # list that has the object (world coordinates) points
     imgpoints = []                    # list that has the pixel locations of these object points
-    
+
     # These two lines to get a combination of all coordinates
     # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
     # Paying attention to the next two lines is not necessary!
@@ -61,7 +61,11 @@ if __name__ == "__main__":
 
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, image_shape, None, None)
 
-    print("Camera matrix (intrinsics) :")
-    print(mtx)
-    print("\nDistortion cooeficients :")
-    print(dist)
+    if ret:
+        print("[SUCCESS] Camera calibration process done")
+        print("Camera matrix (intrinsics) :")
+        print(mtx)
+        print("\nDistortion cooeficients :")
+        print(dist)
+    else:
+        print("[ERROR] Camera calibration process failed")
